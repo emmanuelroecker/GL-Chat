@@ -23,7 +23,7 @@ function sendMessage(message) {
 	messageElt.value = "";
 }
 
-var socket = io.connect("http://192.168.0.15:8080");
+var socket = io.connect(window.location.href);
 
 var envoyerElt = document.getElementById("envoyer");
 var messageElt = document.getElementById("message");
@@ -43,4 +43,4 @@ socket.on("message", function(message) {
 
 var pseudo = prompt("Quel est votre pseudo ?");
 socket.emit("nouvelutilisateur", pseudo);
-addMessage(null, "Hey " + pseudo + " !");
+addMessage(null, "Bonjour " + pseudo + " !");
