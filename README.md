@@ -1,6 +1,6 @@
-# GL-Chat & todolist in realtime
+# Chat real-time
 
-Real-time Chat & ToDoList Server using Express, Node.js
+Real-time Chat Server using [Node.js](nodejs.org) & [Express](http://expressjs.com/)
 
 ## Getting Started
 
@@ -15,14 +15,8 @@ Run `npm install` to install server dependencies.
 
 ## Running Chat server
 
-`node chat.js`
+`node app.js`
 
-URL server access : http:\\localhost:8080
-
-## Running ToDoList server
-
-`node todo.js`
-
-URL server access : http:\\localhost:
+URL server : http://[hostname]:8080
 
 ## Testing
