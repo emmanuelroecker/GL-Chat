@@ -1,0 +1,10 @@
+#taches li span {
+    cursor: pointer;
+    color: red;
+    margin-right: 5px;
+}
+
+#error {
+    visibility: hidden;
+    color: red;
+}

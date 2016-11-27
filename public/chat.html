@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Super Chat</title>
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+
+<body>
+    <h1>Le super Chat temps réel !</h1>
+
+    <p>
+        <label for="message"></label>
+        <input type="text" name="message" id="message" placeholder="Votre message ...">
+        <input type="button" value="Envoyer" id="envoyer" />
+    </p>
+    <div id="messages"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+
+</html>

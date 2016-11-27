@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ToDo List Temps Réel</title>
+    <link rel="stylesheet" href="css/todolist.css">
+</head>
+
+<body>
+    <h1>La ToDo List Temps Réel !</h1>
+
+    <ul id="taches">
+    </ul>
+
+    <form id="ajouterTache">
+        <p>
+            <label for="newtodo">Que dois-je faire ?</label>
+            <input type="text" name="newtodo" id="newtodo" autofocus />
+            <input type="submit" value="valider" />
+        </p>
+    </form>
+
+    <p id="error">
+    </p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/todolist.js"></script>
+</body>
+
+</html>
