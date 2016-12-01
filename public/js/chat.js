@@ -23,7 +23,9 @@ function sendMessage(message) {
 	messageElt.value = "";
 }
 
-var socket = io.connect(window.location.href);
+var serverHost = "http://" + window.location.host;
+console.log(serverHost);
+var socket = io.connect(serverHost, { path: '/chat/socket.io'});
 
 var envoyerElt = document.getElementById("envoyer");
 var messageElt = document.getElementById("message");

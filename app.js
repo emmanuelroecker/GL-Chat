@@ -1,3 +1,5 @@
+#!/usr/bin/env nodejs
+
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -23,7 +25,7 @@ io.on("connection", function(socket) {
 });
 
 
-var serverport = 8080;
+var serverport = 8010;
 server.listen(serverport, function() {
 	console.log("server chat started on port : " + serverport);
 });

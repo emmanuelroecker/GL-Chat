@@ -1,0 +1,16 @@
+[Unit]
+Description=GL-Chat
+After=network.target
+
+[Service]
+ExecStart=/home/projects/nodejs/GL-Chat/app.js
+Restart=always
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/projects/nodejs/GL-Chat
+
+[Install]
+WantedBy=multi-user.target
+
