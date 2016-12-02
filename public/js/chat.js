@@ -1,3 +1,5 @@
+"use strict";
+
 var messagesElt = document.getElementById("messages");
 
 function addMessage(pseudo, message) {
@@ -24,7 +26,11 @@ function sendMessage(message) {
 }
 
 var serverHost = window.location.protocol + "//" + window.location.host;
-var socket = io.connect(serverHost, { path: '/' +  window.location.pathname + '/socket.io'});
+var socketOptions = {};
+if (window.location.pathname !== "/") {
+		socketOptions = { path: window.location.pathname + '/socket.io'};
+}
+var socket = io.connect(serverHost, socketOptions);
 
 var envoyerElt = document.getElementById("envoyer");
 var messageElt = document.getElementById("message");
