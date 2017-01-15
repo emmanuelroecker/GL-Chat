@@ -24,6 +24,7 @@ function addMessage(pseudo, message) {
     pElt.appendChild(messageElt);
 
     messagesElt.appendChild(pElt);
+    messagesElt.scrollTop = messagesElt.scrollHeight;
 }
 
 function sendMessage(message) {
@@ -76,7 +77,6 @@ pseudoForm.addEventListener("submit", function (event) {
         messageElt.focus();
     }
 });
-
 
 pseudo.addEventListener("keyup", function (event) {
     if (pseudo.value.trim() !== "") {
