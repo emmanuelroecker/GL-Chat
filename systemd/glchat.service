@@ -3,7 +3,7 @@ Description=GL-Chat
 After=network.target
 
 [Service]
-ExecStart=/home/projects/nodejs/GL-Chat/app.js
+ExecStart=/home/projects/nodejs/GL-Chat/server.js
 Restart=always
 User=projects
 Group=projects

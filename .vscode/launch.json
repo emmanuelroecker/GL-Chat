@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+        "type": "node",
+        "request": "launch",
+        "name": "server",
+        "cwd": "${workspaceRoot}",
+        "runtimeExecutable": "nodemon",
+        "runtimeArgs": [
+            "--nolazy"
+        ],
+        "stopOnEntry": false,
+        "args": [
+            "--debug",
+            "--nolazy",
+            "${workspaceRoot}/server.js"
+        ],
+        "restart": true,
+        "console": "internalConsole"
+    }, {
+        "name": "client",
+        "type": "chrome",
+        "request": "launch",
+        "sourceMaps": false,
+        "url": "http://localhost:8010/",
+        "runtimeExecutable": "/usr/bin/chromium-browser",
+        "webRoot": "${workspaceRoot}/public",
+        "userDataDir": "${workspaceRoot}/.vscode/chrome"
+    }],
+    "compounds": [{
+        "name": "Server/Client",
+        "configurations": ["server", "client"]
+    }]
+}
