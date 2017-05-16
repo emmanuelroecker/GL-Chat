@@ -1,6 +1,9 @@
 # Chat real-time
 
-Real-time Chat Server using [Node.js](nodejs.org) & [Express](http://expressjs.com/)
+Real-time Chat Server using : 
+* [Node.js](nodejs.org)
+* [Express](http://expressjs.com/)
+* [SQLite](https://www.sqlite.org/)
 
 ## Getting Started
 
@@ -15,7 +18,7 @@ Run `npm install` to install server dependencies.
 
 ## Running Chat server
 
-`node app.js`
+`node server.js`
 
 URL server : http://[hostname]:8080
 

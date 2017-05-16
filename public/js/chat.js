@@ -1,6 +1,39 @@
 "use strict";
 
+var serverHost = window.location.protocol + "//" + window.location.host;
+var socketOptions = {};
+if (window.location.pathname !== "/") {
+    socketOptions = {
+        path: window.location.pathname + '/socket.io'
+    };
+}
+
+var socket = null;
+var messageElt = document.getElementById("message");
+var usersElt = document.getElementById("users");
 var messagesElt = document.getElementById("messages");
+var chatCmp = document.getElementById("chatCmp");
+var pseudoForm = document.getElementById("pseudoForm");
+var pseudo = document.getElementById("pseudo");
+var error = document.querySelector('.error');
+var chatForm = document.getElementById("chatForm");
+
+function addUser(id, user) {
+    var pElt = document.createElement("p");
+    pElt.setAttribute('id', id);
+    var newUserElt = document.createElement("span");
+    newUserElt.classList.add("user");
+    newUserElt.textContent = user;
+    pElt.appendChild(newUserElt);
+    usersElt.appendChild(pElt);
+}
+
+function delUser(userid) {
+    var pElt = document.getElementById(userid);
+    if (pElt) {
+        usersElt.removeChild(pElt);
+    }
+}
 
 function addMessage(timestamp, pseudo, message) {
     var pElt = document.createElement("p");
@@ -11,53 +44,96 @@ function addMessage(timestamp, pseudo, message) {
         pElt.appendChild(pseudoElt);
     }
 
-    var timestampElt = document.createElement("span");
+    var timestampElt = document.createElement("small");
     timestampElt.classList.add("timestamp");
     timestampElt.textContent = timestamp;
     pElt.appendChild(timestampElt);
-    var messageElt = document.createElement("span");
-    messageElt.classList.add("message");
-    messageElt.textContent = message;
-    pElt.appendChild(messageElt);
+    pElt.appendChild(document.createElement("br"));
+
+    var newmessageElt = document.createElement("span");
+    newmessageElt.classList.add("message");
+    newmessageElt.textContent = message;
+    pElt.appendChild(newmessageElt);
 
     messagesElt.appendChild(pElt);
 }
 
-function sendMessage(message) {
-    addMessage(new Date().toLocaleString(), pseudo, messageElt.value);
-    socket.emit("newmessage", messageElt.value);
-    messageElt.value = "";
+function socketEvents(socket) {
+    socket.on('reconnect', function() {
+        error.innerHTML = "Erreur serveur, veuillez vous reconnecter";
+        error.className = "error active";
+        pseudoForm.style.display = "flex";
+        chatCmp.style.display = "none";
+    });
+
+    socket.on('connect_error', function(err) {
+        error.innerHTML = "Erreur serveur, veuillez vous reconnecter";
+        error.className = "error active";
+        pseudoForm.style.display = "flex";
+        chatCmp.style.display = "none";
+    });
+
+    socket.on("newmessage", function(message) {
+        addMessage(message.timestamp, message.user, message.message);
+        messagesElt.scrollTop = messagesElt.scrollHeight;
+    });
+
+    socket.on("messages", function(messages) {
+        messagesElt.innerHTML = '';
+        messages.forEach(function(message) {
+            addMessage(message.timestamp, message.user, message.message);
+        });
+        messagesElt.scrollTop = messagesElt.scrollHeight;
+    });
+
+    socket.on("newuser", function(user) {
+        addUser(user.id, user.user);
+    });
+
+    socket.on("deluser", function(id) {
+        delUser(id);
+    });
+
+    socket.on("users", function(users) {
+        usersElt.innerHTML = '';
+        for (var id in users) {
+            addUser(id, users[id]);
+        }
+    });
 }
 
-var serverHost = window.location.protocol + "//" + window.location.host;
-var socketOptions = {};
-if (window.location.pathname !== "/") {
-    socketOptions = { path: window.location.pathname + '/socket.io' };
-}
-var socket = io.connect(serverHost, socketOptions);
-
-var envoyerElt = document.getElementById("envoyer");
-var messageElt = document.getElementById("message");
-envoyerElt.addEventListener("click", function(e) {
-    sendMessage();
-});
-
-messageElt.addEventListener("keydown", function(e) {
-    if (e.keyCode === 13) {
-        sendMessage();
+chatForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    if (messageElt.value.trim() !== "") {
+        socket.emit("newmessage", messageElt.value);
+        messageElt.value = "";
+        messageElt.focus();
     }
 });
 
-socket.on("newmessage", function(message) {
-    addMessage(message.timestamp, message.user, message.message);
+
+pseudoForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if (pseudo.value.trim() === "") {
+        error.innerHTML = "Veuillez saisir un pseudo";
+        error.className = "error active";
+        pseudo.focus();
+    } else {
+        socket = io.connect(serverHost, socketOptions);
+        socketEvents(socket);
+        socket.emit("newuser", pseudo.value);
+
+        pseudoForm.style.display = "none";
+        chatCmp.style.display = "flex";
+        messageElt.focus();
+    }
 });
 
-socket.on("messages", function(messages) {
-    messages.forEach(function(message) {
-        addMessage(message.timestamp, message.user, message.message);
-    });
+pseudo.addEventListener("keyup", function(event) {
+    if (pseudo.value.trim() !== "") {
+        error.innerHTML = "";
+        error.className = "error";
+        event.preventDefault();
+    }
 });
-
-var pseudo = prompt("Quel est votre pseudo ?");
-socket.emit("newuser", pseudo);
-addMessage(new Date().toLocaleString(), null, "Bonjour " + pseudo + " !");

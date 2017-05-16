@@ -3,19 +3,44 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GLICER Chat</title>
+    <meta name="description" content="Chat temps réél">
+    <meta name="robots" content="noarchive">
+    <meta name="google" content="notranslate">
+    <meta name="author" content="© Glicer">
+    <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/chat.css">
 </head>
 
 <body>
-    <h1>GLICER Chat temps réel</h1>
+    <div class="container">
+        <div class="app">
+            <form id="pseudoForm">
+                <label for="pseudo">Votre pseudo :</label>
+                <small class="error" aria-live="polite"></small>
+                <input id="pseudo" name="pseudo" type="text" autofocus>
+                <button id="psendoSend" type="submit">CONNEXION</button>
+            </form>
 
-    <p>
-        <label for="message"></label>
-        <input type="text" name="message" id="message" placeholder="Votre message ...">
-        <input type="button" value="Envoyer" id="envoyer" />
-    </p>
-    <div id="messages"></div>
+            <div id="chatCmp" class="chat">
+                <div class="chatContent">
+                    <form id="chatForm">
+                        <label class="sr-only" for="message">Message</label>
+                        <input id="message" name="message" type="text" placeholder="Votre message ...">
+                        <button id="envoyer" type="submit">ENVOYER</button>
+                    </form>
+                    <div id="messages"></div>
+                </div>
+                <div id="chatTitle">Chat</div>
+                <div id="users"></div>
+            </div>
+        </div>
+        <footer>
+            <small>Dev & Rock 'n' roll © 2016 Glicer</small>
+        </footer>
+    </div>
 
     <script src="socket.io/socket.io.js"></script>
     <script src="js/chat.js"></script>
