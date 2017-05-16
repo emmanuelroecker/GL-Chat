@@ -1,5 +1,7 @@
 # Chat real-time
 
+[Demo](http://projects.glicer.com/chat/)
+
 Real-time Chat Server using : 
 * [Node.js](nodejs.org)
 * [Express](http://expressjs.com/)
