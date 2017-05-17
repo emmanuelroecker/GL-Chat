@@ -32,9 +32,6 @@ let usersData = {};
 app.get('/user/:user/icon.png', function(req, res, next) {
 
     let user = req.params.user;
-
-    console.log('get user id icon : ' + user);
-
     let buffer = iconsData[user];
     if (!buffer) {
         let shaObj = new jsSHA("SHA-512", "TEXT");
@@ -51,8 +48,6 @@ app.get('/user/:user/icon.png', function(req, res, next) {
 
     res.end(buffer);
 });
-
-
 
 
 let db = new sqlite3.Database(databaseName, (err) => {

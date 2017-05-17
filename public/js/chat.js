@@ -1,3 +1,14 @@
+/**
+ *
+ * @package   Chat
+ * @author    Emmanuel ROECKER <emmanuel.roecker@glicer.com>
+ * @author    Rym BOUCHAGOUR <rym.bouchagour@glicer.com>
+ * @copyright GLICER
+ * @license   MIT
+ * @link      http://www.glicer.com
+ *
+ */
+
 "use strict";
 
 var serverHost = window.location.protocol + "//" + window.location.host;
