@@ -12,29 +12,38 @@
     <meta name="author" content="© Glicer">
     <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/chatfont.css">
 </head>
 
 <body>
     <div class="container">
         <div class="app">
-            <form id="pseudoForm">
+            <form id="formLogin" autocomplete="off">
                 <label for="pseudo">Votre pseudo :</label>
                 <small class="error" aria-live="polite"></small>
                 <input id="pseudo" name="pseudo" type="text" autofocus>
                 <button id="psendoSend" type="submit">CONNEXION</button>
             </form>
 
-            <div id="chatCmp" class="chat">
-                <div class="chatContent">
-                    <form id="chatForm">
-                        <label class="sr-only" for="message">Message</label>
-                        <input id="message" name="message" type="text" placeholder="Votre message ...">
-                        <button id="envoyer" type="submit">ENVOYER</button>
-                    </form>
-                    <div id="messages"></div>
+            <div id="componentChat" class="component">
+                <div id="panelChat" class="panel">
+                    <div id="panelTitleChat" class="panel-title"><span class="icon-chat"></span><span id="panelTitleChatText"> Chat</span></div>
+                    <div class="panel-content">
+                        <div id="messagesChat" class="messages"></div>
+                        <form id="formChat" autocomplete="off">
+                            <label class="sr-only" for="message">Message</label>
+                            <input id="message" name="message" type="text" placeholder="Votre message ...">
+                            <button id="envoyer" type="submit">ENVOYER</button>
+                        </form>
+                    </div>
                 </div>
-                <div id="chatTitle">Chat</div>
-                <div id="users"></div>
+
+                <div id="panelUsers" class="panel">
+                    <div class="panel-title"><span class="icon-users"></span> Utilisateurs connectés</div>
+                    <div class="panel-content">
+                        <div id="messagesUsers" class="messages"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer>

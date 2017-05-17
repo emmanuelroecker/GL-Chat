@@ -62,7 +62,7 @@ function webSockerServer() {
 
         client.on("newuser", (newuser) => {
             usersData[client.id] = newuser;
-            client.broadcast.emit("newuser", { id: client.id, user: newuser });
+            ws.emit("newuser", { id: client.id, user: newuser });
             client.broadcast.emit("newmessage", {
                 timestamp: new Date().toISOString(),
                 user: newuser,

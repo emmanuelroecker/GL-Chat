@@ -44,24 +44,58 @@ body {
 
 /********************************************/
 
-.chat {
+#componentChat {
     display: none;
-    flex-direction: column-reverse;
+}
+
+.component {
+    display: flex;
+    flex-direction: row;
+}
+
+.panel {
+    flex-direction: column;
     align-items: center;
     align-content: center;
     box-sizing: border-box;
     background: white;
+    margin: 20px;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100%;
+    font-weight: 700;
+    color: #fff;
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 10px;
+}
+
+#panelChat {
+    width: 640px;
+}
+
+#panelChat .panel-title {
+    background-color: #38B1CC;
+}
+
+#panelUsers {
     width: 320px;
 }
 
-.chatContent {
-    display: flex;
-    flex-direction: column-reverse;
-    align-content: center;
-    width: 100%;
+#panelUsers .panel-title {
+    background-color: #56cc73;
 }
 
-#chatForm {
+#formChat {
     display: flex;
     align-items: center;
     align-content: center;
@@ -69,12 +103,12 @@ body {
     padding: 15px;
 }
 
-#chatForm button {
+#formChat button {
     width: 90px;
     height: 40px;
 }
 
-#pseudoForm {
+#formLogin {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -86,11 +120,13 @@ body {
 .pseudo {
     font-weight: bold;
     color: #000;
+    margin-right: 10px;
 }
 
 .message {
     color: black;
     word-wrap: break-word;
+    margin-top: 5px;
 }
 
 label {
@@ -117,41 +153,26 @@ input {
     color: #757575;
 }
 
-#pseudoForm input {
+#formLogin input {
     border-bottom: 1px solid #E7E7E7;
     text-indent: 5px;
 }
 
-#pseudoForm button {
+#formLogin button {
     margin-top: 20px;
     padding: 15px 0px;
 }
 
-#messages {
+.messages {
     flex: 1;
     background: white;
     min-height: 300px;
     max-height: 300px;
     overflow: auto;
-    padding: 5px 15px 5px 15px;
 }
 
-#messages p {
-    background: #f6f6f6;
-    padding: 10px;
-    border-radius: 5px;
+.timestamp {
     color: #777777;
-}
-
-#chatTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 65px;
-    width: 100%;
-    font-weight: 700;
-    color: #fff;
-    background-color: #38B1CC;
 }
 
 #error {
@@ -191,8 +212,8 @@ footer {
 /********************************************/
 
 @media screen and (max-width: 767px) {
-    .chat,
-    #pseudoForm {
+    #componentChat,
+    #formLogin {
         width: 100%;
     }
 }
