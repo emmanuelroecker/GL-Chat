@@ -13,17 +13,47 @@
 
 'use strict';
 
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
+let express = require('express');
+let app = express();
+let server = require('http').Server(app);
 let sqlite3 = require('sqlite3');
+let jsSHA = require("jssha");
+let identIcon = require('identicon.js');
 let databaseName = './db.sqlite';
 let port = 8010;
 let tablemessage = 'chat';
 
+
 app.use(express.static('public'));
 
+let iconsData = {};
 let usersData = {};
+
+app.get('/user/:user/icon.png', function(req, res, next) {
+
+    let user = req.params.user;
+
+    console.log('get user id icon : ' + user);
+
+    let buffer = iconsData[user];
+    if (!buffer) {
+        let shaObj = new jsSHA("SHA-512", "TEXT");
+        shaObj.update(user);
+        let hash = shaObj.getHash("HEX");
+        let img = new identIcon(hash).toString();
+        buffer = new Buffer(img, 'base64');
+    }
+
+    res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': buffer.length
+    });
+
+    res.end(buffer);
+});
+
+
+
 
 let db = new sqlite3.Database(databaseName, (err) => {
     if (err) throw new Error(err);
@@ -51,17 +81,21 @@ function webSockerServer() {
         });
 
         client.on('disconnect', function() {
+            let user = usersData[client.id];
+
             client.broadcast.emit("deluser", client.id);
             client.broadcast.emit("newmessage", {
                 timestamp: new Date().toISOString(),
-                user: usersData[client.id],
+                user: user,
                 message: "a quitté le chat !"
             });
+            delete iconsData[user];
             delete usersData[client.id];
         });
 
         client.on("newuser", (newuser) => {
             usersData[client.id] = newuser;
+
             ws.emit("newuser", { id: client.id, user: newuser });
             client.broadcast.emit("newmessage", {
                 timestamp: new Date().toISOString(),

@@ -15,15 +15,26 @@ var usersElt = document.getElementById("messagesUsers");
 var componentChatElt = document.getElementById("componentChat");
 var formLoginElt = document.getElementById("formLogin");
 var pseudoElt = document.getElementById("pseudo");
-var errorElt = document.querySelector('.error');
+var errorElt = document.querySelector(".error");
 var formChatElt = document.getElementById("formChat");
+var formLoginIconElt = document.getElementById("formLoginIcon");
 var panelTitleChatElt = document.getElementById("panelTitleChatText");
+
+function setIdentIcon(text) {
+    var shaObj = new jsSHA("SHA-512", "TEXT");
+    shaObj.update(text);
+    var hash = shaObj.getHash("HEX");
+    var img = new Identicon(hash).toString();
+    formLoginIconElt.setAttribute('src', 'data:image/png;base64,' + img);
+}
+
+
 
 function addUser(id, user) {
     var pElt = document.createElement("p");
     pElt.setAttribute('id', id);
-    var newUserIconElt = document.createElement("span");
-    newUserIconElt.classList.add("icon-user-circle");
+    var newUserIconElt = document.createElement("img");
+    newUserIconElt.setAttribute('src', '/user/' + user + '/icon.png');
     var newUserElt = document.createElement("span");
     newUserElt.classList.add("user");
     newUserElt.textContent = user;
@@ -39,16 +50,16 @@ function delUser(userid) {
     }
 }
 
-function addMessage(timestamp, pseudo, message) {
+function addMessage(timestamp, user, message) {
     var divElt = document.createElement("div");
 
-    var pseudoIconElt = document.createElement("span");
-    pseudoIconElt.classList.add("icon-user-circle");
+    var userIconElt = document.createElement("img");
+    userIconElt.setAttribute('src', '/user/' + user + '/icon.png');
 
     var pseudoElt = document.createElement("span");
     pseudoElt.classList.add("pseudo");
-    pseudoElt.textContent = pseudo;
-    divElt.appendChild(pseudoIconElt);
+    pseudoElt.textContent = user;
+    divElt.appendChild(userIconElt);
     divElt.appendChild(pseudoElt);
 
     var timestampElt = document.createElement("small");
@@ -139,6 +150,7 @@ formLoginElt.addEventListener("submit", function(event) {
 
 pseudoElt.addEventListener("keyup", function(event) {
     if (pseudoElt.value.trim() !== "") {
+        setIdentIcon(pseudoElt.value);
         errorElt.innerHTML = "";
         errorElt.className = "error";
         event.preventDefault();

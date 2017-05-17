@@ -19,6 +19,7 @@
     <div class="container">
         <div class="app">
             <form id="formLogin" autocomplete="off">
+                <img id="formLoginIcon" src="">
                 <label for="pseudo">Votre pseudo :</label>
                 <small class="error" aria-live="polite"></small>
                 <input id="pseudo" name="pseudo" type="text" autofocus>
@@ -27,7 +28,7 @@
 
             <div id="componentChat" class="component">
                 <div id="panelChat" class="panel">
-                    <div id="panelTitleChat" class="panel-title"><span class="icon-chat"></span><span id="panelTitleChatText"> Chat</span></div>
+                    <div id="panelTitleChat" class="panel-title"><span id="panelTitleChatText">Chat</span></div>
                     <div class="panel-content">
                         <div id="messagesChat" class="messages"></div>
                         <form id="formChat" autocomplete="off">
@@ -39,7 +40,7 @@
                 </div>
 
                 <div id="panelUsers" class="panel">
-                    <div class="panel-title"><span class="icon-users"></span> Utilisateurs connectés</div>
+                    <div class="panel-title">Utilisateurs connectés</div>
                     <div class="panel-content">
                         <div id="messagesUsers" class="messages"></div>
                     </div>
@@ -52,6 +53,9 @@
     </div>
 
     <script src="socket.io/socket.io.js"></script>
+    <script src="js/pnglib.js"></script>
+    <script src="js/identicon.js"></script>
+    <script src="js/sha.js"></script>
     <script src="js/chat.js"></script>
 </body>
 
