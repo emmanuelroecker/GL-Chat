@@ -19,16 +19,26 @@ let server = require('http').Server(app);
 let sqlite3 = require('sqlite3');
 let jsSHA = require("jssha");
 let identIcon = require('identicon.js');
+let path = require('path');
+let fs = require('fs');
 let databaseName = './db.sqlite';
 let port = 8010;
 let tablemessage = 'chat';
 
 
+exposeRequire([{ name: "jssha", files: ["sha.js"] },
+    { name: "identicon.js", files: ["pnglib.js", "identicon.js"] },
+    { name: "moment", files: ["min/moment-with-locales.min.js"] },
+], "public/js");
 app.use(express.static('public'));
 
 let iconsData = {};
 let usersData = {};
 
+
+/**
+ * generate unique icon
+ */
 app.get('/user/:user/icon.png', function(req, res, next) {
 
     let user = req.params.user;
@@ -59,9 +69,28 @@ let db = new sqlite3.Database(databaseName, (err) => {
             console.log(`Server started (port : ${port})`);
         });
     });
-
 });
 
+/**
+ * expose js in front end
+ */
+function exposeRequire(modules, directoryDst) {
+    const exec = require('child_process').exec;
+    modules.forEach((moduleElt) => {
+        let modulefilename = require.resolve(moduleElt.name);
+        let modulepath = path.dirname(modulefilename);
+        moduleElt.files.forEach((file) => {
+            let filesrc = modulepath + '/' + file;
+            let filedst = directoryDst + '/' + path.basename(file);
+            exec(`cp "${filesrc}"  "${filedst}"`, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+            });
+        });
+    });
+}
 
 function webSockerServer() {
     let ws = require('socket.io')(server);

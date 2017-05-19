@@ -19,6 +19,8 @@ if (window.location.pathname !== "/") {
     };
 }
 
+moment.locale('fr');
+
 var socket = null;
 var messageElt = document.getElementById("message");
 var messagesElt = document.getElementById("messagesChat");
@@ -63,25 +65,36 @@ function delUser(userid) {
 
 function addMessage(timestamp, user, message) {
     var divElt = document.createElement("div");
+    divElt.classList.add("messagesChatContent");
 
     var userIconElt = document.createElement("img");
     userIconElt.setAttribute('src', '/user/' + user + '/icon.png');
+    divElt.appendChild(userIconElt);
+
+    var divHeaderElt = document.createElement("div");
+    divHeaderElt.classList.add('messagesChatRight');
+
+    var divPseudoElt = document.createElement("div");
+    divPseudoElt.classList.add("messagesChatHeader");
 
     var pseudoElt = document.createElement("span");
     pseudoElt.classList.add("pseudo");
     pseudoElt.textContent = user;
-    divElt.appendChild(userIconElt);
-    divElt.appendChild(pseudoElt);
+    divPseudoElt.appendChild(pseudoElt);
 
     var timestampElt = document.createElement("small");
     timestampElt.classList.add("timestamp");
-    timestampElt.textContent = new Date(timestamp).toLocaleString();
-    divElt.appendChild(timestampElt);
+    timestampElt.textContent = moment(timestamp).fromNow();
+    divPseudoElt.appendChild(timestampElt);
+
+    divHeaderElt.appendChild(divPseudoElt);
 
     var newmessageElt = document.createElement("p");
     newmessageElt.classList.add("message");
     newmessageElt.textContent = message;
-    divElt.appendChild(newmessageElt);
+    divHeaderElt.appendChild(newmessageElt);
+
+    divElt.appendChild(divHeaderElt);
 
     messagesElt.appendChild(divElt);
 }
@@ -161,9 +174,12 @@ formLoginElt.addEventListener("submit", function(event) {
 
 pseudoElt.addEventListener("keyup", function(event) {
     if (pseudoElt.value.trim() !== "") {
+        formLoginIconElt.style.display = "block";
         setIdentIcon(pseudoElt.value);
         errorElt.innerHTML = "";
         errorElt.className = "error";
         event.preventDefault();
+    } else {
+        formLoginIconElt.style.display = "none";
     }
 });

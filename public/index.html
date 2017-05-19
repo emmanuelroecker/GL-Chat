@@ -20,9 +20,11 @@
         <div class="app">
             <form id="formLogin" autocomplete="off">
                 <img id="formLoginIcon" src="">
-                <label for="pseudo">Votre pseudo :</label>
+                <div id="formLoginPseudo">
+                    <label for="pseudo">Pseudo :</label>
+                    <input id="pseudo" name="pseudo" type="text" autofocus>
+                </div>
                 <small class="error" aria-live="polite"></small>
-                <input id="pseudo" name="pseudo" type="text" autofocus>
                 <button id="psendoSend" type="submit">CONNEXION</button>
             </form>
 
@@ -56,6 +58,7 @@
     <script src="js/pnglib.js"></script>
     <script src="js/identicon.js"></script>
     <script src="js/sha.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
     <script src="js/chat.js"></script>
 </body>
 

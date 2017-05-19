@@ -119,12 +119,22 @@ body {
 
 #formLoginIcon {
     width: 64px;
+    margin: 5px auto;
+    display: none;
+}
+
+#formLoginPseudo {
+    display: flex;
+    align-items: baseline;
 }
 
 .pseudo {
-    font-weight: bold;
-    color: #000;
     margin-right: 10px;
+}
+
+#pseudo {
+    flex: 1;
+    width: auto;
 }
 
 .message {
@@ -165,6 +175,32 @@ input {
 #formLogin button {
     margin-top: 20px;
     padding: 15px 0px;
+}
+
+#messagesUsers p {
+    display: flex;
+    align-items: center;
+}
+
+.messagesChatRight {
+    display: flex;
+    flex-direction: column;
+}
+
+.messagesChatHeader {
+    display: flex;
+    align-items: center;
+    color: #777777;
+}
+
+.messagesChatContent {
+    display: flex;
+    align-items: flex-start;
+}
+
+.messages img {
+    width: 48px;
+    margin-right: 10px;
 }
 
 .messages {

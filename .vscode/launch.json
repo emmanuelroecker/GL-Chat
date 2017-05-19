@@ -25,7 +25,8 @@
         "url": "http://localhost:8010/",
         "runtimeExecutable": "/usr/bin/chromium-browser",
         "webRoot": "${workspaceRoot}/public",
-        "userDataDir": "${workspaceRoot}/.vscode/chrome"
+        "userDataDir": "${workspaceRoot}/.vscode/chrome/fr",
+        "disableNetworkCache": false
     }],
     "compounds": [{
         "name": "Server/Client",
