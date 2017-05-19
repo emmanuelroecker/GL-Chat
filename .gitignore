@@ -1,3 +1,4 @@
 /node_modules/
 /.vscode/chrome/
+/public/img/emoji/
 *.sqlite

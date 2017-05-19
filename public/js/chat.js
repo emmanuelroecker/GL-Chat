@@ -21,6 +21,7 @@ if (window.location.pathname !== "/") {
     rootUrl = window.location.pathname;
 }
 
+emojify.setConfig({ img_dir: "img/emoji/basic" });
 moment.locale('fr');
 
 var socket = null;
@@ -37,7 +38,7 @@ var panelTitleChatElt = document.getElementById("panelTitleChatText");
 
 var settingsElt = document.getElementById("settings");
 var settingsIcon = document.getElementById("settingsIcon");
-var mainContent =  document.getElementById("panelChat");
+var mainContent = document.getElementById("panelChat");
 var sidebar = document.getElementById("panelUsers");
 
 function setIdentIcon(text) {
@@ -54,6 +55,7 @@ function addUser(id, user) {
     var pElt = document.createElement("p");
     pElt.setAttribute('id', id);
     var newUserIconElt = document.createElement("img");
+    newUserIconElt.classList.add("avatar");
     newUserIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     var newUserElt = document.createElement("span");
     newUserElt.classList.add("user");
@@ -75,6 +77,7 @@ function addMessage(timestamp, user, message) {
     divElt.classList.add("messagesChatContent");
 
     var userIconElt = document.createElement("img");
+    userIconElt.classList.add("avatar");
     userIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     divElt.appendChild(userIconElt);
 
@@ -104,6 +107,8 @@ function addMessage(timestamp, user, message) {
     divElt.appendChild(divHeaderElt);
 
     messagesElt.appendChild(divElt);
+
+    return divElt;
 }
 
 function socketEvents(socket) {
@@ -122,7 +127,8 @@ function socketEvents(socket) {
     });
 
     socket.on("newmessage", function(message) {
-        addMessage(message.timestamp, message.user, message.message);
+        var elt = addMessage(message.timestamp, message.user, message.message);
+        emojify.run(elt);
         messagesElt.scrollTop = messagesElt.scrollHeight;
     });
 
@@ -131,6 +137,7 @@ function socketEvents(socket) {
         messages.forEach(function(message) {
             addMessage(message.timestamp, message.user, message.message);
         });
+        emojify.run(messagesElt);
         messagesElt.scrollTop = messagesElt.scrollHeight;
     });
 
@@ -191,7 +198,7 @@ pseudoElt.addEventListener("keyup", function(event) {
     }
 });
 
-settingsElt.addEventListener("click", function () {
+settingsElt.addEventListener("click", function() {
     mainContent.classList.toggle("isOpen");
     sidebar.classList.toggle("isOpen");
     settingsIcon.classList.toggle("icon-users");

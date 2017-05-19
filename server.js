@@ -26,10 +26,11 @@ let port = 8010;
 let tablemessage = 'chat';
 
 
-exposeRequire([{ name: "jssha", files: ["sha.js"] },
-    { name: "identicon.js", files: ["pnglib.js", "identicon.js"] },
-    { name: "moment", files: ["min/moment-with-locales.min.js"] },
-], "public/js");
+exposeRequire([{ name: "jssha", files: { "sha.js": "js/sha.js" } },
+    { name: "identicon.js", files: { "pnglib.js": "js/pnglib.js", "identicon.js": "js/identicon.js" } },
+    { name: "moment", files: { "min/moment-with-locales.min.js": "js/moment-with-locales.min.js" } },
+    { name: "emojify.js", files: { "emojify.min.js": "js/emojify.min.js", "../images/basic": "img/emoji" } }
+], "public");
 app.use(express.static('public'));
 
 let iconsData = {};
@@ -79,16 +80,16 @@ function exposeRequire(modules, directoryDst) {
     modules.forEach((moduleElt) => {
         let modulefilename = require.resolve(moduleElt.name);
         let modulepath = path.dirname(modulefilename);
-        moduleElt.files.forEach((file) => {
+        for (let file in moduleElt.files) {
             let filesrc = modulepath + '/' + file;
-            let filedst = directoryDst + '/' + path.basename(file);
-            exec(`cp "${filesrc}"  "${filedst}"`, (error, stdout, stderr) => {
+            let filedst = directoryDst + '/' + moduleElt.files[file];
+            exec(`rsync -aqz "${filesrc}"  "${filedst}"`, (error, stdout, stderr) => {
                 if (error) {
                     console.error(`exec error: ${error}`);
                     return;
                 }
             });
-        });
+        }
     });
 }
 

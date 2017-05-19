@@ -195,7 +195,7 @@ input {
     align-items: flex-start;
 }
 
-.messages img {
+.avatar {
     width: 48px;
     margin-right: 10px;
 }
@@ -210,6 +210,10 @@ input {
 
 .timestamp {
     color: #777777;
+}
+
+.emoji {
+    width: 28px;
 }
 
 #error {
@@ -292,21 +296,17 @@ footer {
     #formLogin {
         width: 100%;
     }
-
     .sidebar.isOpen {
         width: 100%;
     }
-
     #panelChat.main-content.isOpen {
         width: 0;
         z-index: 0;
         overflow: hidden;
     }
-    
     .panel {
         margin: 0px;
     }
-    
     .app {
         margin: 20px;
     }
