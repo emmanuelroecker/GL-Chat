@@ -13,10 +13,12 @@
 
 var serverHost = window.location.protocol + "//" + window.location.host;
 var socketOptions = {};
+var rootUrl = "";
 if (window.location.pathname !== "/") {
     socketOptions = {
         path: window.location.pathname + '/socket.io'
     };
+    rootUrl = window.location.pathname;
 }
 
 moment.locale('fr');
@@ -47,7 +49,7 @@ function addUser(id, user) {
     var pElt = document.createElement("p");
     pElt.setAttribute('id', id);
     var newUserIconElt = document.createElement("img");
-    newUserIconElt.setAttribute('src', '/user/' + user + '/icon.png');
+    newUserIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     var newUserElt = document.createElement("span");
     newUserElt.classList.add("user");
     newUserElt.textContent = user;
@@ -68,7 +70,7 @@ function addMessage(timestamp, user, message) {
     divElt.classList.add("messagesChatContent");
 
     var userIconElt = document.createElement("img");
-    userIconElt.setAttribute('src', '/user/' + user + '/icon.png');
+    userIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     divElt.appendChild(userIconElt);
 
     var divHeaderElt = document.createElement("div");
