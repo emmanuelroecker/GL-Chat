@@ -1,6 +1,7 @@
 html {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 body {
@@ -10,6 +11,7 @@ body {
     font-size: 1em;
     min-height: 100vh;
     margin: 0 auto;
+    width: 100%;
 }
 
 .container {
@@ -18,12 +20,11 @@ body {
     align-items: stretch;
     align-content: center;
     justify-content: center;
-    flex: 1 0 auto;
+    width: 100%;
 }
 
 .app {
     display: flex;
-    flex-direction: column-reverse;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -85,10 +86,6 @@ body {
 
 #panelChat .panel-title {
     background-color: #38B1CC;
-}
-
-#panelUsers {
-    width: 320px;
 }
 
 #panelUsers .panel-title {
@@ -224,6 +221,45 @@ input {
 
 /********************************************/
 
+.main-content {
+    order: 1;
+    width: 100%;
+}
+
+.sidebar {
+    order: 2;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s;
+    transition: opacity 0.5s, width 0.1s;
+}
+
+.sidebar.isOpen {
+    width: 320px;
+    opacity: 1;
+}
+
+#settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    color: #616161;
+    font-size: 1.2em;
+    padding: 6px 5px;
+    background: transparent;
+    border: none;
+    opacity: 0.8;
+}
+
+#settings:hover {
+    opacity: 1;
+}
+
+
+/********************************************/
+
 button {
     border-radius: 0px;
     font-weight: 700;
@@ -255,5 +291,23 @@ footer {
     #componentChat,
     #formLogin {
         width: 100%;
+    }
+
+    .sidebar.isOpen {
+        width: 100%;
+    }
+
+    #panelChat.main-content.isOpen {
+        width: 0;
+        z-index: 0;
+        overflow: hidden;
+    }
+    
+    .panel {
+        margin: 0px;
+    }
+    
+    .app {
+        margin: 20px;
     }
 }

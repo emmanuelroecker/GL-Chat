@@ -35,6 +35,11 @@ var formChatElt = document.getElementById("formChat");
 var formLoginIconElt = document.getElementById("formLoginIcon");
 var panelTitleChatElt = document.getElementById("panelTitleChatText");
 
+var settingsElt = document.getElementById("settings");
+var settingsIcon = document.getElementById("settingsIcon");
+var mainContent =  document.getElementById("panelChat");
+var sidebar = document.getElementById("panelUsers");
+
 function setIdentIcon(text) {
     var shaObj = new jsSHA("SHA-512", "TEXT");
     shaObj.update(text);
@@ -184,4 +189,11 @@ pseudoElt.addEventListener("keyup", function(event) {
     } else {
         formLoginIconElt.style.display = "none";
     }
+});
+
+settingsElt.addEventListener("click", function () {
+    mainContent.classList.toggle("isOpen");
+    sidebar.classList.toggle("isOpen");
+    settingsIcon.classList.toggle("icon-users");
+    settingsIcon.classList.toggle("icon-cancel");
 });

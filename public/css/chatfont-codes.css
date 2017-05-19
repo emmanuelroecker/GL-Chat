@@ -1,4 +1,5 @@
 
+.icon-cancel:before { content: '\e800'; } /* '' */
 .icon-users:before { content: '\e801'; } /* '' */
 .icon-chat:before { content: '\e802'; } /* '' */
 .icon-user-circle:before { content: '\f2bd'; } /* '' */

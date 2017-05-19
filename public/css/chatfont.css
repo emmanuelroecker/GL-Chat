@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'chatfont';
-  src: url('../font/chatfont.eot?99300051');
-  src: url('../font/chatfont.eot?99300051#iefix') format('embedded-opentype'),
-       url('../font/chatfont.woff2?99300051') format('woff2'),
-       url('../font/chatfont.woff?99300051') format('woff'),
-       url('../font/chatfont.ttf?99300051') format('truetype'),
-       url('../font/chatfont.svg?99300051#chatfont') format('svg');
+  src: url('../font/chatfont.eot?25854140');
+  src: url('../font/chatfont.eot?25854140#iefix') format('embedded-opentype'),
+       url('../font/chatfont.woff2?25854140') format('woff2'),
+       url('../font/chatfont.woff?25854140') format('woff'),
+       url('../font/chatfont.ttf?25854140') format('truetype'),
+       url('../font/chatfont.svg?25854140#chatfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'chatfont';
-    src: url('../font/chatfont.svg?99300051#chatfont') format('svg');
+    src: url('../font/chatfont.svg?25854140#chatfont') format('svg');
   }
 }
 */
@@ -55,6 +55,7 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
+.icon-cancel:before { content: '\e800'; } /* '' */
 .icon-users:before { content: '\e801'; } /* '' */
 .icon-chat:before { content: '\e802'; } /* '' */
 .icon-user-circle:before { content: '\f2bd'; } /* '' */
