@@ -35,6 +35,12 @@
       "css": "comment",
       "code": 59395,
       "src": "fontawesome"
+    },
+    {
+      "uid": "d862a10e1448589215be19702f98f2c1",
+      "css": "smile",
+      "code": 61720,
+      "src": "fontawesome"
     }
   ]
 }

@@ -21,9 +21,10 @@ if (window.location.pathname !== "/") {
     rootUrl = window.location.pathname;
 }
 
+emojify.setConfig({ img_dir: "img/emoji/basic" });
 moment.locale('fr');
 
-var socket = null;
+var socket = null; 
 var messageElt = document.getElementById("message");
 var messagesElt = document.getElementById("messagesChat");
 var usersElt = document.getElementById("messagesUsers");
@@ -36,7 +37,7 @@ var formLoginIconElt = document.getElementById("formLoginIcon");
 var panelTitleChatElt = document.getElementById("panelTitleChatText");
 
 var settingsElt = document.getElementById("settings");
-var mainContent =  document.getElementById("panelChat");
+var mainContent = document.getElementById("panelChat");
 var sidebar = document.getElementById("panelUsers");
 
 function setIdentIcon(text) {
@@ -48,11 +49,11 @@ function setIdentIcon(text) {
 }
 
 
-
 function addUser(id, user) {
     var pElt = document.createElement("p");
     pElt.setAttribute('id', id);
     var newUserIconElt = document.createElement("img");
+    newUserIconElt.classList.add("avatar");
     newUserIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     var newUserElt = document.createElement("span");
     newUserElt.classList.add("user");
@@ -74,6 +75,7 @@ function addMessage(timestamp, user, message) {
     divElt.classList.add("messagesChatContent");
 
     var userIconElt = document.createElement("img");
+    userIconElt.classList.add("avatar");
     userIconElt.setAttribute('src', rootUrl + '/user/' + user + '/icon.png');
     divElt.appendChild(userIconElt);
 
@@ -103,45 +105,49 @@ function addMessage(timestamp, user, message) {
     divElt.appendChild(divHeaderElt);
 
     messagesElt.appendChild(divElt);
+
+    return divElt;
 }
 
 function socketEvents(socket) {
-    socket.on('reconnect', function() {
+    socket.on('reconnect', function () {
         errorElt.innerHTML = "Erreur serveur, veuillez vous reconnecter";
         errorElt.className = "error active";
         formLoginElt.style.display = "flex";
         componentChatElt.style.display = "none";
     });
 
-    socket.on('connect_error', function(err) {
+    socket.on('connect_error', function (err) {
         errorElt.innerHTML = "Erreur serveur, veuillez vous reconnecter";
         errorElt.className = "error active";
         formLoginElt.style.display = "flex";
         componentChatElt.style.display = "none";
     });
 
-    socket.on("newmessage", function(message) {
-        addMessage(message.timestamp, message.user, message.message);
+    socket.on("newmessage", function (message) {
+        var elt = addMessage(message.timestamp, message.user, message.message);
+        emojify.run(elt);
         messagesElt.scrollTop = messagesElt.scrollHeight;
     });
 
-    socket.on("messages", function(messages) {
+    socket.on("messages", function (messages) {
         messagesElt.innerHTML = '';
-        messages.forEach(function(message) {
+        messages.forEach(function (message) {
             addMessage(message.timestamp, message.user, message.message);
         });
+        emojify.run(messagesElt);
         messagesElt.scrollTop = messagesElt.scrollHeight;
     });
 
-    socket.on("newuser", function(user) {
+    socket.on("newuser", function (user) {
         addUser(user.id, user.user);
     });
 
-    socket.on("deluser", function(id) {
+    socket.on("deluser", function (id) {
         delUser(id);
     });
 
-    socket.on("users", function(users) {
+    socket.on("users", function (users) {
         usersElt.innerHTML = '';
         for (var id in users) {
             addUser(id, users[id]);
@@ -149,7 +155,7 @@ function socketEvents(socket) {
     });
 }
 
-formChatElt.addEventListener("submit", function(event) {
+formChatElt.addEventListener("submit", function (event) {
     event.preventDefault();
     if (messageElt.value.trim() !== "") {
         socket.emit("newmessage", messageElt.value);
@@ -159,7 +165,7 @@ formChatElt.addEventListener("submit", function(event) {
 });
 
 
-formLoginElt.addEventListener("submit", function(event) {
+formLoginElt.addEventListener("submit", function (event) {
     event.preventDefault();
 
     if (pseudoElt.value.trim() === "") {
@@ -178,7 +184,7 @@ formLoginElt.addEventListener("submit", function(event) {
     }
 });
 
-pseudoElt.addEventListener("keyup", function(event) {
+pseudoElt.addEventListener("keyup", function (event) {
     if (pseudoElt.value.trim() !== "") {
         formLoginIconElt.style.display = "block";
         setIdentIcon(pseudoElt.value);
@@ -193,8 +199,8 @@ pseudoElt.addEventListener("keyup", function(event) {
 settingsElt.addEventListener("click", function () {
     mainContent.classList.toggle("isOpen");
     sidebar.classList.toggle("isOpen");
-    
-    if(sidebar.classList.contains("isOpen")){
+
+    if (sidebar.classList.contains("isOpen")) {
         settingsElt.innerHTML = '<i class="icon-chat"></i> Accéder au chat';
     }
     else {

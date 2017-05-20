@@ -30,7 +30,7 @@
         </form>
 
         <div id="componentChat" class="component">
-            <button id="settings" class="visible-xs"><i class="icon-cancel"></i> Accéder au chat</button>
+            <button id="settings" class="visible-xs"><i class="icon-chat"></i> Accéder au chat</button>
             <div class="panels">
                 <div id="panelChat" class="panel main-content isOpen">
                     <div id="panelTitleChat" class="panel-title"><span id="panelTitleChatText">Chat</span></div>
@@ -39,13 +39,16 @@
                         <form id="formChat" autocomplete="off">
                             <label class="sr-only" for="message">Message</label>
                             <input id="message" name="message" type="text" placeholder="Votre message ...">
+
+
+                            <a id="emojis" href="https://www.webpagefx.com/tools/emoji-cheat-sheet/" 
+                               target="_blank"><span class="icon-smile"></span></a>
                             <button id="envoyer" type="submit">
                                 <span class="icon-comment visible-xs"></span><span class="hidden-xs">ENVOYER</span>
                             </button>
                         </form>
                     </div>
                 </div>
-
                 <div id="panelUsers" class="panel sidebar isOpen">
                     <div class="panel-title">Utilisateurs connectés</div>
                     <div class="panel-content">
@@ -55,8 +58,9 @@
             </div>
         </div>
     </div>
+
     <footer>
-        <small>Dev & Rock 'n' roll © 2016 Glicer</small>
+        <small><a href="http://www.glicer.com">Dev & Rock 'n' roll © 2016 Glicer</a></small>
     </footer>
 </div>
 
@@ -65,6 +69,7 @@
 <script src="js/identicon.js"></script>
 <script src="js/sha.js"></script>
 <script src="js/moment-with-locales.min.js"></script>
+<script src="js/emojify.min.js"></script>
 <script src="js/chat.js"></script>
 </body>
 

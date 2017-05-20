@@ -14,6 +14,7 @@ body {
     width: 100%;
 }
 
+
 .container {
     display: flex;
     flex-direction: column;
@@ -32,6 +33,10 @@ body {
     margin: 20px;
 }
 
+*:focus {
+    outline: none !important;
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -43,6 +48,10 @@ body {
     border: 0;
 }
 
+.visible-lg, .visible-md, .visible-sm, .visible-xs {
+    display: none !important;
+}
+
 /********************************************/
 
 #componentChat {
@@ -50,7 +59,7 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .component {
@@ -179,12 +188,10 @@ input {
     text-indent: 5px;
 }
 
-
 #formLogin button {
     margin-top: 20px;
     padding: 15px 0px;
 }
-
 
 #messagesUsers p {
     display: flex;
@@ -207,7 +214,7 @@ input {
     align-items: flex-start;
 }
 
-.messages img {
+.avatar {
     width: 48px;
     margin-right: 10px;
 }
@@ -224,12 +231,15 @@ input {
     color: #777777;
 }
 
+.emoji {
+    width: 28px;
+}
+
 #error {
     display: none;
     color: red;
     text-align: center;
 }
-
 
 /********************************************/
 
@@ -248,21 +258,28 @@ input {
     width: 320px;
 }
 
-#settings {
+a {
+    text-decoration: none;
     text-align: center;
     color: #616161;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+#settings {
+    text-align: center;
     font-size: 1.2em;
-    padding: 6px 5px;
-    background: transparent;
-    border: none;
-    opacity: 0.8;
     margin-bottom: 20px;
+    padding: 15px 0px;
+    width: 100%;
 }
 
-#settings:hover {
-    opacity: 1;
+#emojis {
+    margin-right: 10px;
 }
-
 
 /********************************************/
 
@@ -281,12 +298,6 @@ button:hover {
 
 /********************************************/
 
-.visible-lg, .visible-md, .visible-sm, .visible-xs {
-    display: none !important;
-}
-
-/********************************************/
-
 footer {
     font-family: Consolas, Verdana, Arial, sans-serif;
     font-size: 0.8em;
@@ -294,7 +305,6 @@ footer {
     text-align: center;
     margin-top: 10px;
 }
-
 
 /********************************************/
 
@@ -321,11 +331,11 @@ footer {
     .sidebar.isOpen {
         width: 100%;
     }
-    
+
     .panel {
         margin: 0px;
     }
-    
+
     .app {
         margin: 20px;
     }
