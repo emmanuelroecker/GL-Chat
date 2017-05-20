@@ -36,7 +36,6 @@ var formLoginIconElt = document.getElementById("formLoginIcon");
 var panelTitleChatElt = document.getElementById("panelTitleChatText");
 
 var settingsElt = document.getElementById("settings");
-var settingsIcon = document.getElementById("settingsIcon");
 var mainContent =  document.getElementById("panelChat");
 var sidebar = document.getElementById("panelUsers");
 
@@ -194,6 +193,11 @@ pseudoElt.addEventListener("keyup", function(event) {
 settingsElt.addEventListener("click", function () {
     mainContent.classList.toggle("isOpen");
     sidebar.classList.toggle("isOpen");
-    settingsIcon.classList.toggle("icon-users");
-    settingsIcon.classList.toggle("icon-cancel");
+    
+    if(sidebar.classList.contains("isOpen")){
+        settingsElt.innerHTML = '<i class="icon-chat"></i> Accéder au chat';
+    }
+    else {
+        settingsElt.innerHTML = '<i class="icon-users"></i><span>Utilisateurs connectés</span>';
+    }
 });

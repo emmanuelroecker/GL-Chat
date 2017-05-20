@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'chatfont';
-  src: url('../font/chatfont.eot?25854140');
-  src: url('../font/chatfont.eot?25854140#iefix') format('embedded-opentype'),
-       url('../font/chatfont.woff2?25854140') format('woff2'),
-       url('../font/chatfont.woff?25854140') format('woff'),
-       url('../font/chatfont.ttf?25854140') format('truetype'),
-       url('../font/chatfont.svg?25854140#chatfont') format('svg');
+  src: url('../font/chatfont.eot?18805507');
+  src: url('../font/chatfont.eot?18805507#iefix') format('embedded-opentype'),
+       url('../font/chatfont.woff2?18805507') format('woff2'),
+       url('../font/chatfont.woff?18805507') format('woff'),
+       url('../font/chatfont.ttf?18805507') format('truetype'),
+       url('../font/chatfont.svg?18805507#chatfont') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'chatfont';
-    src: url('../font/chatfont.svg?25854140#chatfont') format('svg');
+    src: url('../font/chatfont.svg?18805507#chatfont') format('svg');
   }
 }
 */
@@ -58,4 +58,5 @@
 .icon-cancel:before { content: '\e800'; } /* '' */
 .icon-users:before { content: '\e801'; } /* '' */
 .icon-chat:before { content: '\e802'; } /* '' */
+.icon-comment:before { content: '\e803'; } /* '' */
 .icon-user-circle:before { content: '\f2bd'; } /* '' */

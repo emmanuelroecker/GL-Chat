@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GLICER Chat</title>
@@ -16,20 +16,22 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="app">
-            <form id="formLogin" autocomplete="off">
-                <img id="formLoginIcon" src="">
-                <div id="formLoginPseudo">
-                    <label for="pseudo">Pseudo :</label>
-                    <input id="pseudo" name="pseudo" type="text" autofocus>
-                </div>
-                <small class="error" aria-live="polite"></small>
-                <button id="psendoSend" type="submit">CONNEXION</button>
-            </form>
+<div class="container">
+    <div class="app">
+        <form id="formLogin" autocomplete="off">
+            <img id="formLoginIcon" src="">
 
-            <div id="componentChat" class="component">
-                <button id="settings"><i id="settingsIcon" class="icon-cancel"></i></button>
+            <div id="formLoginPseudo">
+                <label for="pseudo">Pseudo :</label>
+                <input id="pseudo" name="pseudo" type="text" autofocus>
+            </div>
+            <small class="error" aria-live="polite"></small>
+            <button id="psendoSend" type="submit">CONNEXION</button>
+        </form>
+
+        <div id="componentChat" class="component">
+            <button id="settings" class="visible-xs"><i class="icon-cancel"></i> Accéder au chat</button>
+            <div class="panels">
                 <div id="panelChat" class="panel main-content isOpen">
                     <div id="panelTitleChat" class="panel-title"><span id="panelTitleChatText">Chat</span></div>
                     <div class="panel-content">
@@ -37,7 +39,9 @@
                         <form id="formChat" autocomplete="off">
                             <label class="sr-only" for="message">Message</label>
                             <input id="message" name="message" type="text" placeholder="Votre message ...">
-                            <button id="envoyer" type="submit">ENVOYER</button>
+                            <button id="envoyer" type="submit">
+                                <span class="icon-comment visible-xs"></span><span class="hidden-xs">ENVOYER</span>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -50,17 +54,18 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <small>Dev & Rock 'n' roll © 2016 Glicer</small>
-        </footer>
     </div>
+    <footer>
+        <small>Dev & Rock 'n' roll © 2016 Glicer</small>
+    </footer>
+</div>
 
-    <script src="socket.io/socket.io.js"></script>
-    <script src="js/pnglib.js"></script>
-    <script src="js/identicon.js"></script>
-    <script src="js/sha.js"></script>
-    <script src="js/moment-with-locales.min.js"></script>
-    <script src="js/chat.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script src="js/pnglib.js"></script>
+<script src="js/identicon.js"></script>
+<script src="js/sha.js"></script>
+<script src="js/moment-with-locales.min.js"></script>
+<script src="js/chat.js"></script>
 </body>
 
 </html>

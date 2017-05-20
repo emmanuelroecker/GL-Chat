@@ -29,6 +29,7 @@ body {
     align-content: center;
     justify-content: center;
     flex: 1 0 auto;
+    margin: 20px;
 }
 
 .sr-only {
@@ -42,16 +43,25 @@ body {
     border: 0;
 }
 
-
 /********************************************/
 
 #componentChat {
     display: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
 }
 
 .component {
     display: flex;
     flex-direction: row;
+}
+
+.panels {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .panel {
@@ -169,10 +179,12 @@ input {
     text-indent: 5px;
 }
 
+
 #formLogin button {
     margin-top: 20px;
     padding: 15px 0px;
 }
+
 
 #messagesUsers p {
     display: flex;
@@ -228,29 +240,23 @@ input {
 
 .sidebar {
     order: 2;
-    width: 0;
+    width: 320px;
     overflow: hidden;
-    opacity: 0;
-    -webkit-transition: opacity 0.5s, width 0.1s;
-    transition: opacity 0.5s, width 0.1s;
 }
 
 .sidebar.isOpen {
     width: 320px;
-    opacity: 1;
 }
 
 #settings {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999;
+    text-align: center;
     color: #616161;
     font-size: 1.2em;
     padding: 6px 5px;
     background: transparent;
     border: none;
     opacity: 0.8;
+    margin-bottom: 20px;
 }
 
 #settings:hover {
@@ -273,6 +279,11 @@ button:hover {
     background-color: #10bccc;
 }
 
+/********************************************/
+
+.visible-lg, .visible-md, .visible-sm, .visible-xs {
+    display: none !important;
+}
 
 /********************************************/
 
@@ -288,12 +299,7 @@ footer {
 /********************************************/
 
 @media screen and (max-width: 767px) {
-    #componentChat,
     #formLogin {
-        width: 100%;
-    }
-
-    .sidebar.isOpen {
         width: 100%;
     }
 
@@ -301,6 +307,19 @@ footer {
         width: 0;
         z-index: 0;
         overflow: hidden;
+        -webkit-transition: width 0.1s;
+        transition: width 0.1s;
+    }
+
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+        -webkit-transition: width 0.1s;
+        transition: width 0.1s;
+    }
+
+    .sidebar.isOpen {
+        width: 100%;
     }
     
     .panel {
@@ -310,4 +329,13 @@ footer {
     .app {
         margin: 20px;
     }
+
+    .visible-xs {
+        display: block !important;
+    }
+
+    .hidden-xs {
+        display: none !important;
+    }
+
 }
