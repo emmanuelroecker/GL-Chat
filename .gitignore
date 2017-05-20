@@ -2,3 +2,4 @@
 /.vscode/chrome/
 /public/img/emoji/
 *.sqlite
+.idea/
