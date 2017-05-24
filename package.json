@@ -4,6 +4,9 @@
   "main": "server.js",
   "author": "Glicer <contact@glicer.com>",
   "description": "Un chat temps réel",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "emojify.js": "^1.1.0",
     "express": "^4.15.2",
